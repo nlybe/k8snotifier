@@ -1,6 +1,6 @@
 # K8s Notifier
 
-A Python-based application for listening to a pubsub subscription about GKE cluster messages and sending notifications to slack.
+A Python-based application for listening to a pubsub subscription for GKE cluster messages and sending notifications to slack.
 
 GKE offers the option to send to a PubSub topic the following notification types:
 
@@ -18,8 +18,8 @@ Read more details on [GCP documentation](https://cloud.google.com/kubernetes-eng
 On GCP the following resources are required for a given project:
 
 - a PubSub topic and subscription
-- a GKE cluster with **Notifications** feature enabled and declaring the Topic ID
-- a Service Account with "roles/pubsub.subscriber" role to the subscription
+- a GKE cluster with **Notifications** feature enabled and declaring the **Topic ID**
+- a Service Account with **roles/pubsub.subscriber** role to the subscription
 
 You'll need also a Slack application with an incoming Webhook URL for the channel you'd like to receive these notifications. You can get more information at [https://api.slack.com/messaging/webhooks](https://api.slack.com/messaging/webhooks).
 
