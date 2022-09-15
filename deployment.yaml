@@ -1,0 +1,70 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8snotifier
+  labels:
+    app: k8snotifier
+spec:
+  selector:
+    matchLabels:
+      app: k8snotifier
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: k8snotifier
+    spec:
+      containers:
+      - name: k8snotifier
+        image: k8snotifier:latest
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1024Mi
+          requests:
+            cpu: 100m
+            memory: 512Mi
+        volumeMounts:
+        - name: gcp-pubsub-sa-key
+          mountPath: /etc/credentials
+          readOnly: true
+        env:
+        - name: GCP_PROJECT_ID
+          valueFrom:
+            configMapKeyRef:
+              name: k8snotifier-cm
+              key: GCP_PROJECT_ID
+        - name: PUBSUB_SUBSCRIPTION_ID
+          valueFrom:
+            configMapKeyRef:
+              name: k8snotifier-cm
+              key: PUBSUB_SUBSCRIPTION_ID
+        - name: SLACK_WEBHOOK_URL
+          valueFrom:
+            configMapKeyRef:
+              name: k8snotifier-cm
+              key: SLACK_WEBHOOK_URL
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          valueFrom:
+            configMapKeyRef:
+              name: k8snotifier-cm
+              key: GOOGLE_APPLICATION_CREDENTIALS
+      volumes:
+      - name: "gcp-pubsub-sa-key"
+        secret:
+          secretName: "gcp-pubsub-sa-key"
+          items:
+          - key: gcp_pubsub_sa_key.json
+            path: gcp_pubsub_sa_key.json
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: k8snotifier-cm
+data: 
+  GCP_PROJECT_ID: <GCP_PROJECT_ID>
+  PUBSUB_SUBSCRIPTION_ID: <GCP_PUBSUB_SUB>
+  SLACK_WEBHOOK_URL: <SLACK_WEBHOOK_URL>
+  GOOGLE_APPLICATION_CREDENTIALS: /etc/gcp_pubsub_sa_key.json  
