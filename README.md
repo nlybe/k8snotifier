@@ -13,9 +13,11 @@ The aim of this tool is to provide a gke-notification-handler, which listen to a
 Read more details on [GCP documentation](https://cloud.google.com/kubernetes-engine/docs/tutorials/cluster-notifications-slack).
 
 
-## Setup
+## Prerequisites
 
-On GCP the following resources are required for a given project:
+This is the list of prerequisites required:
+
+On GCP this is the list of prerequisites required for an existing GCP project:
 
 - a PubSub topic and subscription
 - a GKE cluster with **Notifications** feature enabled and declaring the **Topic ID**
@@ -23,9 +25,11 @@ On GCP the following resources are required for a given project:
 
 You'll need also a Slack application with an incoming Webhook URL for the channel you'd like to receive these notifications. You can get more information at [https://api.slack.com/messaging/webhooks](https://api.slack.com/messaging/webhooks).
 
+## How to use
 
 ### Environment Variables
 
+You will have to set the env variables below
 
 | Variable                       | Description                                                 |
 | ------------------------------ | ----------------------------------------------------------- |
