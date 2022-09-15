@@ -15,9 +15,7 @@ Read more details on [GCP documentation](https://cloud.google.com/kubernetes-eng
 
 ## Prerequisites
 
-This is the list of prerequisites required:
-
-On GCP this is the list of prerequisites required for an existing GCP project:
+This is the list of prerequisites required for an existing GCP project:
 
 - a PubSub topic and subscription
 - a GKE cluster with **Notifications** feature enabled and declaring the **Topic ID**
