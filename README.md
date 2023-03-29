@@ -40,14 +40,14 @@ You will have to set the env variables below
 
 ### Try locally
 
-For run - test locally set the vars in **run_locally.sh** and run the following:
+For run - test locally set the vars in **deploy.sh** and run the following:
 
 ```bash
 # run directly the python script by using the "app" as param
-./run_locally.sh app
+./deploy.sh app
 
 # run locally as docker container by using an IMAGE_TAG value as param (this will build the image first)
-run_locally.sh IMAGE_TAG
+deploy.sh IMAGE_TAG
 ```
 
 

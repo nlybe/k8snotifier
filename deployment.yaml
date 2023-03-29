@@ -29,27 +29,9 @@ spec:
         - name: gcp-pubsub-sa-key
           mountPath: /etc/credentials
           readOnly: true
-        env:
-        - name: GCP_PROJECT_ID
-          valueFrom:
-            configMapKeyRef:
-              name: k8snotifier-cm
-              key: GCP_PROJECT_ID
-        - name: PUBSUB_SUBSCRIPTION_ID
-          valueFrom:
-            configMapKeyRef:
-              name: k8snotifier-cm
-              key: PUBSUB_SUBSCRIPTION_ID
-        - name: SLACK_WEBHOOK_URL
-          valueFrom:
-            configMapKeyRef:
-              name: k8snotifier-cm
-              key: SLACK_WEBHOOK_URL
-        - name: GOOGLE_APPLICATION_CREDENTIALS
-          valueFrom:
-            configMapKeyRef:
-              name: k8snotifier-cm
-              key: GOOGLE_APPLICATION_CREDENTIALS
+        envFrom:
+        - configMapRef:
+            name: k8snotifier-cm
       volumes:
       - name: "gcp-pubsub-sa-key"
         secret:
